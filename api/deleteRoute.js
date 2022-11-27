@@ -1,22 +1,20 @@
-const { FieldValue } = require('firebase-admin/firestore');
-
-const { updateMemo } = require('../db/memos');
+const { deleteMemo } = require('../db/memos');
 const { verifyToken } = require('../auth');
 
 const routes = async (fastify, options) => {
     fastify.route({
         method: 'POST',
-        url: '/api',
+        url: '/api/delete',
         schema: {
             body: {
-                $ref: "memoSchema"
+                $ref: "memoIDSchema"
             },
     
             response: {
                 201: {
                     type: 'object',
                     properties: {
-                        success: { type: 'boolean' }
+                        success: { type: 'boolean' } 
                     }
                 }
             }
@@ -27,13 +25,12 @@ const routes = async (fastify, options) => {
         },
     
         handler: async (req, res) => {
-            const memo = req.body;
-            memo.timestamp = FieldValue.serverTimestamp();
+            const memoID = req.body.memoID;
 
             const user = verifyToken(req.headers["x-access-token"]);
 
             if (user) {
-                const m = await updateMemo(user._id, memo._id, memo);
+                const m = await deleteMemo(user._id, memoID);
 
                 if (m) {
                     return {
@@ -60,8 +57,6 @@ const routes = async (fastify, options) => {
                     }
                 }
             }
-
-            
         }
     });
 }

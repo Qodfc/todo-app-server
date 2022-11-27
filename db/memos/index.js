@@ -1,6 +1,5 @@
 const getMemos = require('./getMemos');
-const createMemo = require('./createMemo');
 const updateMemo = require('./updateMemo');
+const deleteMemo = require('./deleteMemo');
 
-
-module.exports = { getMemos, createMemo, updateMemo };
+module.exports = { getMemos, updateMemo, deleteMemo };

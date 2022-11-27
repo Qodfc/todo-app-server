@@ -10,9 +10,11 @@ const memoSchema = {
         'title'
     ],
     properties: {
+        _id: { type: 'string' },
+        authToken: { type: 'string' },
         article: { type: 'string' },
         color: { type: 'string' },
-        id: { type: 'integer' },
+        id: { type: 'string' },
         tags: { 
             type: 'array',
             items: {

@@ -29,21 +29,22 @@ const routes = async (fastify, options) => {
         handler: async (req, res) => {
             const user = verifyToken(req.query.authToken);
 
-            //if (user) {
+            if (user) {
                 const arr = [];
                 const memos = await getMemos(user._id);
 
                 memos.forEach(doc => {
-                    console.log(doc.id, '=>', doc.data());
-                    arr.push(doc.data());
+                    const docData = doc.data();
+                    docData._id = doc.id;
+                    arr.push(docData);
                 });
                 
                 return arr;
-            /*}
+            }
             else return {
                 statusCode: 401,
                 msg: 'Invalid token'
-            };*/
+            };
         }
     });
 }

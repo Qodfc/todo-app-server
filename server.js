@@ -1,17 +1,19 @@
 const fastify = require('fastify')({
     logger: true
 });
-const { memoSchema, userSchema, userLoginSchema } = require('./model');
+const { memoSchema, memoIDSchema, userSchema, userLoginSchema } = require('./model');
 
 fastify.addSchema(memoSchema);
 fastify.addSchema(userSchema);
 fastify.addSchema(userLoginSchema);
+fastify.addSchema(memoIDSchema);
 
-const { getRoute, setRoute } = require('./api');
+const { getRoute, setRoute, deleteRoute } = require('./api');
 const { loginRoute, registerRoute } = require('./auth');
 
 fastify.register(getRoute);
 fastify.register(setRoute);
+fastify.register(deleteRoute);
 fastify.register(loginRoute);
 fastify.register(registerRoute);
 

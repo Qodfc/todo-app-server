@@ -1,15 +1,32 @@
 const db = require('../connector');
 
-const updateMemo = async (userID, memoID) => {
-    const docRef = db.collection('memos').find()
+const updateMemo = async (userID, memoID = null, memoObj) => {
+    const collection = db.collection('memos').doc(userID).collection('memos');
 
-    await docRef.set({
-        
-    });
-
-    await docRef.update({
-        
-    })
+    if (memoID) { // Update
+        console.log(true)
+        try {
+            const doc = await collection.doc(memoID).get();
+            if (doc.exists) {
+                const res = await collection.doc(memoID).update(memoObj);
+            }
+        }
+        catch (e) {
+            console.error(e);
+            return false;
+        }
+    }
+    else { // Create
+        console.log(false)
+        try {
+            await collection.add(memoObj);
+            return true;
+        }
+        catch (e) {
+            console.error(e);
+            return false;
+        }
+    }
 }
 
 module.exports = updateMemo;
