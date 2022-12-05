@@ -3,15 +3,10 @@ const { verifyToken } = require('../auth');
 
 const routes = async (fastify, options) => {
     fastify.route({
-        method: 'GET',
-        url: '/api',
+        method: 'POST',
+        url: '/api/get',
         schema: {
-            querystring: {
-                authToken: {
-                    type: 'string'
-                }
-            },
-    
+            body: {},
             response: {
                 201: {
                     type: 'object',
@@ -27,7 +22,7 @@ const routes = async (fastify, options) => {
         },
     
         handler: async (req, res) => {
-            const user = verifyToken(req.query.authToken);
+            const user = verifyToken(req.headers["x-access-token"]);
 
             if (user) {
                 const arr = [];

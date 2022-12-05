@@ -6,7 +6,7 @@ const { verifyToken } = require('../auth');
 const routes = async (fastify, options) => {
     fastify.route({
         method: 'POST',
-        url: '/api',
+        url: '/api/set',
         schema: {
             body: {
                 $ref: "memoSchema"
