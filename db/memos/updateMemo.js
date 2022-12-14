@@ -8,7 +8,8 @@ const updateMemo = async (userID, memoID = null, memoObj) => {
         try {
             const doc = await collection.doc(memoID).get();
             if (doc.exists) {
-                const res = await collection.doc(memoID).update(memoObj);
+                await collection.doc(memoID).update(memoObj);
+                return true;
             }
         }
         catch (e) {

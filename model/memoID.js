@@ -3,10 +3,10 @@ const memoIDSchema = {
     type: 'object',
     additionalProperties: false,
     required: [
-        'memoID'
+        '_id'
     ],
     properties: {
-        memoID: { type: 'string' }
+        _id: { type: 'string' }
     }
 };
 

@@ -32,7 +32,7 @@ const routes = async (fastify, options) => {
                 const body = await req.body;
 
                 if (await getUser(body.id)) return {
-                    statusCode: 400,
+                    statusCode: 200,
                     message: "A user already exists."
                 };
 
@@ -59,7 +59,7 @@ const routes = async (fastify, options) => {
                 console.error(e);
                 return {
                     statusCode: 400,
-                    message: "A user already exists."
+                    message: "An error has occured."
                 };
             }
         }

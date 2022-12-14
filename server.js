@@ -20,7 +20,8 @@ fastify.register(registerRoute);
 const start = async () => {
     try {
         await fastify.listen({
-            port: 3000
+            port: 3000,
+            bodyLimit: 30 * 1024 * 1024
         });
     } catch (err) {
         fastify.log.error(err);

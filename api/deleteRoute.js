@@ -25,7 +25,7 @@ const routes = async (fastify, options) => {
         },
     
         handler: async (req, res) => {
-            const memoID = req.body.memoID;
+            const memoID = req.body._id;
 
             const user = verifyToken(req.headers["x-access-token"]);
 
